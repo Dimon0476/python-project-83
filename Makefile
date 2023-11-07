@@ -1,21 +1,25 @@
-PORT ?= 8000
-start:
-	poetry run gunicorn -w 5 -b 0.0.0.0:$(PORT) page_analyzer:app
-
 install:
 	poetry install
 
-build:
-	poetry build
+init_postgres:
+	psql -a -d $(DATABASE_URL) -f database.sql
 
-dev:
-	poetry run flask --app page_analyzer:app run
+build: install init_postgres
 
-package-install:
-	python3 -m pip install --user dist/*.whl
+publish:
+	poetry publish --dry-run
 
 lint:
 	poetry run flake8 page_analyzer
 
-check:
+dev:
+	poetry run flask --app page_analyzer:app --debug run
+
+PORT ?= 8000
+start:
+	poetry run gunicorn -w 5 -b 0.0.0.0:$(PORT) page_analyzer:app
+
+selfcheck:
 	poetry check
+
+check: selfcheck lint

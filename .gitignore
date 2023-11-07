@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.idea/
+.pytest_cache/
+.env
+/page_analyzer/__pycache__/
+/page_analyzer/app_copy.py/
