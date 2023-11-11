@@ -4,6 +4,9 @@ version = "0.1.0"
 description = ""
 authors = ["Dimon0476 <dmitry.fodorov@gmail.com>"]
 readme = "README.md"
+packages = [
+   { include = "page_analyzer" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -23,3 +26,7 @@ flake8 = "^6.1.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.scripts]
+app = "page_analyzer.app:main"
